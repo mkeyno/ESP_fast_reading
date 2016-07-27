@@ -175,8 +175,13 @@ function check_validity()
 </html>
 )=====";  
 #define NUM_LEDS  144
+#define DATA_PIN    3 // (8,15),( 4,2) (6,12) (7,13) 
+                      // (2,4)   (1,5) (5,14) (0,16)
+#define CLOCK_PIN  4
+
 #define Image_Line  200
 #define SPI_FLASH_SEC_SIZE 4096
+
 CRGB leds[NUM_LEDS];
 
 extern "C" uint32_t _SPIFFS_start;
@@ -201,8 +206,8 @@ String MyIP="";
 String myHostname = "ESPflash"; //add 1-14
 String IMAGE_Names[10]; 
 bool SHOW=false;
-const char *SSID = "----";
-const char *SSIDPASS = "-----";
+const char *SSID = "---";
+const char *SSIDPASS = "----";
 
 ////////////////////////////////////////////////////////////////////////
 String formatBytes(size_t bytes){
@@ -436,7 +441,10 @@ if(number_of_file)
   {
    for(byte i=0;i<number_of_file;i++) copy_file_from_SPIFF_to_Raw_Flash("/"+IMAGE_Names[i], i);  
   }
-
+ FastLED.addLeds<APA102,DATA_PIN,CLOCK_PIN,RGB,DATA_RATE_MHZ(20)>(leds,NUM_LEDS);
+   FastLED.setBrightness(255);
+  FastLED.clear();
+ FastLED.show();  
 }
 
 static uint32_t _index=0,OpenlastTime=0,frame_time=0;
