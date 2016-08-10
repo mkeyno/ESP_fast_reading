@@ -206,8 +206,8 @@ String MyIP="";
 String myHostname = "ESPflash"; //add 1-14
 String IMAGE_Names[10]; 
 bool SHOW=false;
-const char *SSID = "keyno";
-const char *SSIDPASS = "09127163464";
+const char *SSID = "---";
+const char *SSIDPASS = "---";
 
 ////////////////////////////////////////////////////////////////////////
 String formatBytes(size_t bytes){
